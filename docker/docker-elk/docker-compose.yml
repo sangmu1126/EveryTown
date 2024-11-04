@@ -1,0 +1,60 @@
+version: '3'
+name: everytown-elk
+
+services:
+  elasticsearch:
+    build:
+      context: elasticsearch/
+      args:
+        ELASTIC_VERSION: 7.17.11
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
+      - elasticsearch:/usr/share/elasticsearch/data:Z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: -Xms256m -Xmx256m
+      discovery.type: single-node
+    networks:
+      - elk
+
+  logstash:
+    build:
+      context: logstash/
+      args:
+        ELASTIC_VERSION: 7.17.11
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+      - /usr/share/java/mysql-connector-java-8.0.33.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.33.jar
+      - /home/chowanhee/everytown/docker-elk/logstash/metadata/restaurant/sql_last_value:/usr/share/logstash/metadata/restaurant/sql_last_value
+      - /home/chowanhee/everytown/docker-elk/logstash/metadata/place/sql_last_value:/usr/share/logstash/metadata/place/sql_last_value
+      - /home/chowanhee/everytown/docker-elk/logstash/metadata/chatroom/sql_last_value:/usr/share/logstash/metadata/chatroom/sql_last_value
+    environment:
+      LS_JAVA_OPTS: -Xms256m -Xmx256m
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    build:
+      context: kibana/
+      args:
+        ELASTIC_VERSION: 7.17.11
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+networks:
+  elk:
+    name: db-network
+    external: true
+
+
+volumes:
+  elasticsearch:

@@ -1,0 +1,30 @@
+version: '3'
+name: everytown-db
+
+services:
+  redis:
+    container_name: redis
+    image: redis:7.0.11
+    ports:
+      - "6379:6379"
+    networks:
+      - db-network
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0.33
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: everytowndb
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    networks:
+      - db-network
+    depends_on:
+      - redis
+      
+networks:
+  db-network:
+    driver: bridge
+    name: db-network

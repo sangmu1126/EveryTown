@@ -1,0 +1,84 @@
+.community-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.community-page-bar {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  border-bottom: 2px solid black;
+}
+
+.community-title {
+  flex-grow: 1;
+}
+
+.right-icons {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.community-search-bar {
+  width: 500px;
+  margin-left: 10px;
+}
+
+.community-item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid black;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: space-between; /* 수평 가운데 정렬 */
+  padding: 10px;
+}
+
+.left-section {
+  border-top: 2px solid black;
+}
+
+.comp1 {
+  flex: 70%;
+}
+
+.community-tags {
+  display: flex;
+  align-items: center;
+}
+
+.community-tags img {
+  border-radius: 50%;
+  width: 50px; /* 이미지의 크기를 조절할 수 있습니다. */
+  height: 50px;
+  margin-right: 10px; /* 이미지와 텍스트 사이의 간격을 조절할 수 있습니다. */
+}
+.community-tags p{
+  white-space: nowrap; /* 텍스트를 줄 바꿈하지 않도록 설정 */
+}
+
+.round-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* 50%로 지정하여 이미지를 원형으로 만듦 */
+}
+
+.comp3 {
+  margin-left: 60px; /* 이미지와 텍스트 사이의 간격을 조절할 수 있습니다. */
+  margin-right: 30px;
+  flex: 15%;
+}
+
+.comp4 {
+  flex: 10%;
+}
+
+.comp5 {
+  flex: 10%;
+  white-space: nowrap; /* 텍스트를 줄 바꿈하지 않도록 설정 */
+}
+
+.community-item button {
+  white-space: nowrap;
+}

@@ -1,0 +1,60 @@
+{
+  "properties" : {
+    "id": {
+      "type" : "keyword"
+    },
+    "category": {
+      "type" : "keyword"
+    },
+    "member_id": {
+      "type": "keyword"
+    },
+    "nickname" : {
+      "type": "keyword"
+    },
+    "title": {
+      "type": "text",
+      "similarity": "BM25",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 256
+        }
+      },
+      "analyzer": "my_nori_analyzer"
+    },
+    "content": {
+      "type": "text",
+      "similarity": "BM25",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 256
+        }
+      },
+      "analyzer": "my_nori_analyzer"
+    },
+    "address": {
+      "type" : "text",
+      "analyzer": "my_nori_analyzer"
+    },
+    "view_cnt": {
+      "type": "long"
+    },
+    "comment_cnt": {
+      "type": "long"
+    },
+    "like_cnt": {
+      "type": "long"
+    },
+    "location": {
+      "type":"geo_point"
+    },
+    "modified_at": {
+      "type": "date"
+    },
+    "created_at": {
+      "type": "date"
+    }
+  }
+}

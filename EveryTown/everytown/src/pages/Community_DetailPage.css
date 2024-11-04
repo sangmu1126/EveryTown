@@ -1,0 +1,48 @@
+.community-detailpage {
+    display: flex;
+    flex-direction: column;
+ }
+  
+
+
+
+/*community-page-bar*/
+  .community-user-info-bar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-bottom: 2px solid black;
+  }
+  .community-user {
+    flex-grow: 1;
+  }
+
+  .content-spacing {
+    margin-top: 200px; /* 여백 공간 조정 */
+  }
+  
+  .comment-container {
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .response-textfield {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .submit-comment-button {
+    position: absolute; /* 버튼을 텍스트 필드 내부에 배치 */
+    right: 10px; /* 우측에서 10px 떨어진 위치에 배치 */
+    bottom: 10px; /* 하단에서 10px 떨어진 위치에 배치 */
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    background-color: #4CAF50; /* 버튼 색상 */
+    color: white; /* 텍스트 색상 */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* 커서 모양 변경 */
+  }
