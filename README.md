@@ -39,5 +39,4 @@
 ## 📎 관련 자료
 - 📄 [보고서](https://docs.google.com/document/d/1Zllg3lDuv-dEGombYiowHgKHdV3grfAq/edit)
 - 📽️ [소개 영상](https://youtu.be/j1DEnthmLNE)
-- 🧾 [EndPoint 문서](https://drive.google.com/file/d/117iecHhuIsq1HFK2e6KtDn9TexVh5G_f/view)
 - 🖼️ [전시 패널](https://docs.google.com/presentation/d/1ZTzCi61T8RARKUR96Yrp9BYDdZXibNvj/edit)
