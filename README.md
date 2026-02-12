@@ -1,42 +1,85 @@
-# 🏙️ EveryTown
+# EveryTown
 
-> 1인 가구를 위한 지역 정보 제공 서비스  
-> Elasticsearch를 활용한 고성능 검색 시스템 탑재
+> **Local Information Service for Single-Person Households**
 
-위치 기반으로 상가, 커뮤니티, 채팅 기능을 제공하는 웹 서비스. MySQL + Elasticsearch로 성능을 극대화한 지역 밀착형 정보 플랫폼입니다.
+**EveryTown** is a location-based web service designed to assist single-person households by providing information on nearby shops, community boards, and real-time chat features based on the user's current location.
 
-## 📌 프로젝트 기간
-2023.09 ~ 2023.12
+## 📅 Project Details
+* **Period**: 2023.09 - 2023.12
+* **Team Size**: 3 members (2 Backend, 1 Frontend)
+* **My Role**: Backend (Team Leader)
+    * Implemented search functionality (Elasticsearch integration & optimization)
+    * Developed Chat and Community servers
+    * Infrastructure setup using Docker
 
-## 🧑‍💻 팀 구성 및 역할
-- 팀원: 3명 (BackEnd 2, FrontEnd 1)
-- 내 역할: **BackEnd 개발 및 팀장**
+## 🔗 Links
+* **GitHub**: [https://github.com/sangmu1126/EveryTown](https://github.com/sangmu1126/EveryTown)
+* **Demo Video**: [YouTube Link](https://youtu.be/j1DEnthmLNE)
 
-## 🌟 주요 기능
-- 지역 상가 정보 위치 기반 검색
-- 커뮤니티 게시판 및 실시간 채팅 기능
-- 사용자 위치 기반 정렬
-- Docker 기반 ELK 스택 구성
+---
 
-## 🧰 기술 스택
-- Frontend: HTML, CSS, JavaScript, React
-- Backend: Spring Boot, STOMP
-- DB: MySQL, Elasticsearch, Logstash, Kibana
-- DevOps: Docker
+## 🛠️ Tech Stack
 
-## 🔧 내가 담당한 부분
-- MySQL과 Elasticsearch 동기화
-- 한글 검색 최적화를 위한 Nori tokenizer 적용
-- 채팅 기능 구현 (STOMP 기반)
-- Docker로 ELK 스택 컨테이너화
-- 커뮤니티 게시판 + React 연동 UI
+### Backend
+* **Language & Framework**: Java, Spring Boot
+* **Database**: MySQL
+* **Search Engine**: Elasticsearch, Logstash, Kibana (ELK Stack)
 
-## 🔄 트러블슈팅
-- 대용량 상가 정보 검색 속도 문제 발생 (2s → 200ms, 캐시 시 10ms)
-- IO 병목을 방지하기 위한 DB 구조 개선
-- 검색 정확도를 위해 형태소 분석 기반 검색엔진 구성
+### Frontend
+* **Language & Library**: JavaScript, React
+* **MarkUp**: HTML, CSS
 
-## 📎 관련 자료
-- 📄 [보고서](https://docs.google.com/document/d/1Zllg3lDuv-dEGombYiowHgKHdV3grfAq/edit)
-- 📽️ [소개 영상](https://youtu.be/j1DEnthmLNE)
-- 🖼️ [전시 패널](https://docs.google.com/presentation/d/1ZTzCi61T8RARKUR96Yrp9BYDdZXibNvj/edit)
+### DevOps & Tools
+* **Infra**: Docker
+* **Collaboration**: Git, GitHub
+
+---
+
+## 💡 Key Features
+
+### 1. Location-Based Shop Search
+* Searches for commercial districts within a **2km radius** based on the user's location.
+* Utilizes **Nori Tokenizer** to analyze Korean morphemes, allowing for accurate search results even with typos or synonyms.
+
+### 2. Real-Time Chat
+* Implemented user-to-user chat using Spring Boot's **STOMP Protocol**.
+* Chat history is logged and retrievable.
+
+### 3. Community Board
+* Posts from users physically closer to the viewer are sorted with higher priority.
+* Supports standard CRUD operations (Create, Read, Update, Delete) and comments.
+
+---
+
+## 🚀 Troubleshooting & Performance Optimization
+
+### ⚡ 10x Search Performance Improvement with Elasticsearch
+
+#### 1. Problem Context
+Searching through massive public data for nationwide shops using MySQL resulted in significant latency.
+* **Issue**: Using `LIKE` queries combined with `ST_DISTANCE_SPHERE` for location calculation took an average of **2 seconds**.
+* **Bottleneck**: The server performance was bound by Disk I/O.
+
+#### 2. Solution
+Adopted **Elasticsearch** to minimize database I/O and separate Read/Write responsibilities.
+
+* **Read/Write Separation**: Write operations are handled by MySQL, while Read (Search) operations are offloaded to Elasticsearch.
+* **Data Synchronization**: Configured **Logstash** to periodically detect changes in MySQL and synchronize them with Elasticsearch.
+* **Optimization**: Replaced the standard tokenizer with **Nori Tokenizer** (specialized for Korean) to improve search accuracy.
+
+#### 3. Results
+Query processing speed improved drastically.
+
+* **Latency**: Reduced from **2s** to **200ms** (down to **10ms** when cached).
+* **Efficiency**: Optimized server resource usage by containerizing the ELK stack with Docker.
+
+---
+
+## 🏛️ System Architecture
+
+* **Client**: React handles the UI and communicates with the backend.
+* **Server**: Spring Boot processes requests and manages business logic.
+* **Data Flow**:
+    * **MySQL**: Stores persistent data.
+    * **Logstash**: Synchronizes data between MySQL and Elasticsearch.
+    * **Elasticsearch**: Handles high-speed search queries.
