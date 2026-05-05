@@ -1,0 +1,8 @@
+# 이 파일은 예시 파일입니다.
+# 실제 배포 시에는 이 파일을 terraform.tfvars로 복사한 뒤 값을 수정하여 사용하세요.
+# terraform.tfvars는 절대로 깃허브에 올리지 마세요 (.gitignore에 등록됨).
+
+aws_region   = "ap-northeast-2"
+project_name = "everytown"
+db_username  = "admin"
+db_password  = "your_secure_password_here"
