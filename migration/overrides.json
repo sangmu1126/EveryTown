@@ -1,0 +1,8 @@
+{
+    "containerOverrides": [
+        {
+            "name": "everytown-backend",
+            "image": "309866937539.dkr.ecr.ap-northeast-2.amazonaws.com/everytown-backend:migration"
+        }
+    ]
+}

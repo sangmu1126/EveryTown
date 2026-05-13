@@ -1,0 +1,5 @@
+FROM python:3.9-slim
+WORKDIR /app
+RUN pip install requests mysql-connector-python elasticsearch==7.13.4
+COPY setup_es.py migrate.py analysis-setting.json restaurant-mapping.json place-mapping.json ./
+CMD ["sh", "-c", "python setup_es.py && python migrate.py"]

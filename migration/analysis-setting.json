@@ -1,0 +1,29 @@
+{
+  "analysis": {
+    "tokenizer": {
+      "my_nori_tokenizer": {
+        "type": "nori_tokenizer",
+        "decompound_mode": "mixed",
+        "discard_punctuation": "true"
+      },
+      "my_ngram_tokenizer": {
+        "type": "ngram",
+        "min_gram": 2,
+        "max_gram": 3
+      }
+    },
+    "analyzer": {
+      "my_nori_analyzer": {
+        "type": "custom",
+        "tokenizer": "my_nori_tokenizer",
+        "filter": ["nori_readingform", "lowercase", "stop", "trim"]
+      },
+      "my_ngram_analyzer": {
+        "type": "custom",
+        "tokenizer": "my_ngram_tokenizer",
+        "filter": ["lowercase", "stop", "trim"],
+        "char_filter": ["html_strip"]
+      }
+    }
+  }
+}
