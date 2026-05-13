@@ -8,10 +8,26 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from tabulate import tabulate
 
+import os
+
 app = Flask(__name__)
 
-connection = pymysql.connect(host='localhost', port=3306, user='root', password='rootpassword', db='everytowndb',
-                             charset='utf8', autocommit=True, cursorclass=pymysql.cursors.DictCursor)
+# 환경 변수에서 DB 정보 읽기 (ECS에서 주입됨)
+db_host = os.getenv('DB_HOST', 'localhost')
+db_user = os.getenv('DB_USER', 'root')
+db_pass = os.getenv('DB_PASS', 'rootpassword')
+db_name = os.getenv('DB_NAME', 'everytowndb')
+
+connection = pymysql.connect(
+    host=db_host,
+    port=3306,
+    user=db_user,
+    password=db_pass,
+    db=db_name,
+    charset='utf8',
+    autocommit=True,
+    cursorclass=pymysql.cursors.DictCursor
+)
 cursor = connection.cursor()
 
 
