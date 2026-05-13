@@ -21,10 +21,21 @@ public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
 
     @Override
     public RestHighLevelClient elasticsearchClient() {
-        ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo("localhost:9200")      //localhost:9200 = ElasticSearch
-                .build();
-        return RestClients.create(clientConfiguration).rest();
+        String osHost = System.getenv("OS_HOST");
+        if (osHost == null) {
+            osHost = "localhost:9200";
+        }
+        
+        ClientConfiguration.MaybeSecureClientConfigurationBuilder builder = ClientConfiguration.builder()
+                .connectedTo(osHost);
+        
+        // AWS Managed OpenSearch usually ends with .es.amazonaws.com and requires SSL
+        // Internal ECS ES container doesn't use SSL by default
+        if (osHost.contains("amazonaws.com")) {
+            builder.usingSsl();
+        }
+        
+        return RestClients.create(builder.build()).rest();
     }
 
     @Bean

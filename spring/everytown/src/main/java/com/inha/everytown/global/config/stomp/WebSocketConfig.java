@@ -15,7 +15,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // stomp 연결 주소 => /ws/chat
         registry.addEndpoint("/ws/chat")
-                .setAllowedOrigins("http://localhost:3000")
+                .setAllowedOrigins("http://localhost:3000", "http://everytown-frontend-309866937539.s3-website.ap-northeast-2.amazonaws.com")
                 .withSockJS();  // sockjs를 연결
     }
 
