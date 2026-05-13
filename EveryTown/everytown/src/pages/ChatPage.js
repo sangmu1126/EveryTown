@@ -17,7 +17,7 @@ const ChatItem = ({ id, name, memberId, nickname, tag, memberCnt, created_at, ad
   const goToChatRoom = async (roomId) => {
     // 입장 -> 이걸 해줘야 참여 인원 수 올라감
     await axios
-      .get(`http://localhost:8080/chat/room/${roomId}/enter`)
+      .get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/room/${roomId}/enter`)
       .then(response => {
         localStorage.setItem("roomName", response.data.name);
       });
@@ -25,7 +25,7 @@ const ChatItem = ({ id, name, memberId, nickname, tag, memberCnt, created_at, ad
   };
 
   const deleteChatRoom = async (roomId) => {
-    axios.delete(`http://localhost:8080/chat/room/${roomId}`);
+    axios.delete(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/room/${roomId}`);
     window.location.href = "/chat"
   }
 
@@ -82,7 +82,7 @@ function ChatPage() {
 
   const fetchData = async (lat, lon) => {
     try {
-      const response = await axios.get('http://localhost:8080/chat/rooms', {
+      const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/rooms', {
         params: {
           lat: lat,
           lon: lon,

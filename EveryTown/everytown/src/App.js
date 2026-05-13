@@ -42,7 +42,7 @@ function App() {
 // 로그아웃 처리 함수
 const handleLogout = async () => {
   try {
-    await axios.post('http://localhost:8080/auth/logout', {
+    await axios.post('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/auth/logout', {
       refreshToken: localStorage.getItem('refreshToken')
     });
     localStorage.removeItem('accessToken');
@@ -61,7 +61,7 @@ const handleLogout = async () => {
   // 토큰 만료 시 재발급 함수
   const refreshAccessToken = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/auth/reissue', {
+      const response = await axios.post('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/auth/reissue', {
         refreshToken: localStorage.getItem('refreshToken')
       });
       setAccessToken(response.data.accessToken);

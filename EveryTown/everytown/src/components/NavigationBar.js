@@ -10,7 +10,7 @@ function NavigationBar({ isLoggedIn, onLogout }) {
 
   const getMemberInfo = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/member/me', {
+      const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/member/me', {
         headers:{
           Authorization: `Bearer ${accessToken}`
         }

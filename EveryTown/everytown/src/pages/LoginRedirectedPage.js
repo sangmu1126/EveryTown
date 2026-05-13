@@ -10,7 +10,7 @@ const LoginRedirectPage = () => {
     const handleOAuthLogin = async (code) => {
         try {
             // 카카오로부터 받아온 code를 서버에 전달하여 카카오로 회원가입 & 로그인한다
-            const response = await axios.get(`http://localhost:8080/auth/redirected/${platform}?code=${code}`);
+            const response = await axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/auth/redirected/${platform}?code=${code}`);
             const { accessToken, refreshToken, accessTokenExpiresAt } = response.data;
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);

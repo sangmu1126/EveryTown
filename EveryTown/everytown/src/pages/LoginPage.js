@@ -3,9 +3,9 @@ import React from 'react';
 
 const LoginPage = () => {
   const loginUrls = {
-    kakao: 'http://localhost:8080/auth/login/kakao',
-    google: 'http://localhost:8080/auth/login/google',
-    naver: 'http://localhost:8080/auth/login/naver'
+    kakao: 'http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/auth/login/kakao',
+    google: 'http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/auth/login/google',
+    naver: 'http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/auth/login/naver'
   };
 
 

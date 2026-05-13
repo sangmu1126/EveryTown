@@ -29,7 +29,7 @@ function PlacePage() {
   const fetchRecommendations = async () => {
     try {
       const categoryCode = category || 'I212'; // Default to 'I212' if no category is selected
-      const response = await axios.get('http://localhost:8080/place/recommend', {
+      const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place/recommend', {
         params: {
           lat: location.lat,
           lon: location.lon,
@@ -44,7 +44,7 @@ function PlacePage() {
   
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/place', {
+      const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place', {
         params: {
           lat: location.lat,
           lon: location.lon,

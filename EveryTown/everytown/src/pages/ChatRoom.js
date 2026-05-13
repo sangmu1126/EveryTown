@@ -26,7 +26,7 @@ function ChatRoom() {
 
     const getChatLog = () => {
         axios
-            .get(`http://localhost:8080/chat/room/${roomId.current}/log`, {
+            .get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/room/${roomId.current}/log`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -43,7 +43,7 @@ function ChatRoom() {
 
     const updateMemberCnt = () => {
         axios
-            .get(`http://localhost:8080/chat/room/${roomId.current}/memberCnt`, {
+            .get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/room/${roomId.current}/memberCnt`, {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,
                 },
@@ -133,7 +133,7 @@ function ChatRoom() {
             locationPathname.split('/').pop(),
         );
 
-        let socket = new SockJS('http://localhost:8080/ws/chat');
+        let socket = new SockJS('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/ws/chat');
         stompClient.current = Stomp.over(socket);
 
         if (stompClient.current != null){

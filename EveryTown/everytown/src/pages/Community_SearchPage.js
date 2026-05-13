@@ -11,7 +11,7 @@ function CommunitySearchPage() {
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/boards/search', {
+        const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/search', {
           params: {
             query: searchQuery,
             page: 0, // 페이지 번호

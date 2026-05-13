@@ -14,7 +14,7 @@ const CommunityItem = ({ id, title, thumbnail, viewCnt, commentCnt, likeCnt, con
   // 게시글 삭제
   const deletePost = async () => {
     try {
-      await axios.delete(`http://localhost:8080/boards/${id}`);
+      await axios.delete(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}`);
       // 삭제 후, 부모 컴포넌트에서 해당 게시글을 제외한 목록으로 업데이트
       onDelete(id);
       navigate('/community');
@@ -28,7 +28,7 @@ const CommunityItem = ({ id, title, thumbnail, viewCnt, commentCnt, likeCnt, con
   // 게시글을 불러오고 조회수를 증가시키는 함수
   const fetchPostAndIncrementViewCount = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/boards/${id}`);
+      const response = await axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}`);
       const postData = response.data;
       setCommunitys((prevCommunitys) =>
         prevCommunitys.map((community) =>
@@ -104,7 +104,7 @@ function CommunityPage() {
 
   const fetchDataFromServer = async (selectedCategory = '') => {
     try {
-      const response = await axios.get('http://localhost:8080/boards', {
+      const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards', {
         params: {
           page: 0,
           category: selectedCategory,

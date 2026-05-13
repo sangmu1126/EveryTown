@@ -13,7 +13,7 @@ function Community_CreatePage() {
 
   const handlePostSave = async () => {
     try {
-      await axios.post('http://localhost:8080/boards', {
+      await axios.post('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards', {
         title,
         content,
         boardCategory: parseInt(boardCategory), // boardCategory를 숫자로 변환

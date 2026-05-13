@@ -23,7 +23,7 @@ function Food_ReviewingPage() {
 
   const handleReviewSave = async () => {
     try {
-      await axios.post(`http://localhost:8080/restaurants/${id}/review`, {
+      await axios.post(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/restaurants/${id}/review`, {
         content: reviewContent,
         rating: rating,
         tag: tags

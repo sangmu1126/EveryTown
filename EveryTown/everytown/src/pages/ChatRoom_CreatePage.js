@@ -20,7 +20,7 @@ function ChatRoom_CreatePage() {
       let tags = tag.replace(/#/g,'').replace(/,/g,'').split(' ');
       
       // 채팅방 생성
-      const response = await axios.post(`http://localhost:8080/chat/room`, {
+      const response = await axios.post(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/room`, {
         name: roomName,
         tag: tags,
         address: location.address
@@ -40,7 +40,7 @@ function ChatRoom_CreatePage() {
   // 채팅방 이동
   const goToChatRoom = async (roomId) => {
     // 참가 인원수 늘리기
-    axios.get(`http://localhost:8080/chat/room/${roomId}/enter`)
+    axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/room/${roomId}/enter`)
     navigate(`/chat/room/${roomId}`);
   };
 

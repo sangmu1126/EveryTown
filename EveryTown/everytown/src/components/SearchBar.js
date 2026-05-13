@@ -18,16 +18,16 @@ function SearchBar() {
     let searchUrl = '';
     switch(selectedCategory) {
       case 'food':
-        searchUrl = 'http://localhost:8080/restaurants/search';
+        searchUrl = 'http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/restaurants/search';
         break;
       case 'place':
-        searchUrl = 'http://localhost:8080/place/search'; // Place 검색 URL
+        searchUrl = 'http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place/search'; // Place 검색 URL
         break;
       case 'chat':
-        searchUrl = 'http://localhost:8080/chat/rooms/search'; // Chat 검색 URL
+        searchUrl = 'http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/chat/rooms/search'; // Chat 검색 URL
         break;
       case 'community':
-        searchUrl = 'http://localhost:8080/boards/search'; // Community 검색 URL
+        searchUrl = 'http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/search'; // Community 검색 URL
         break;
     }
 

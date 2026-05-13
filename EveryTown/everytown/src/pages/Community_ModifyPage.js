@@ -16,7 +16,7 @@ function Community_ModifyPage() {
     // 페이지 로드 시 게시글 정보 불러오기
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/boards/${id}`);
+        const response = await axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}`);
         const { title, content, boardCategory } = response.data;
         setTitle(title);
         setContent(content);
@@ -32,7 +32,7 @@ function Community_ModifyPage() {
   const handlePostSave = async () => {
     try {
       // 게시글 수정을 위한 POST 요청
-      await axios.post(`http://localhost:8080/boards/${id}`, {
+      await axios.post(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}`, {
         title,
         content,
         boardCategory: parseInt(boardCategory), // boardCategory를 숫자로 변환

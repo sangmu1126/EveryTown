@@ -22,7 +22,7 @@ const CommunityDetailPage = () => {
 
   const handleSubmitComment = async () => {
     try {
-      const response = await axios.post(`http://localhost:8080/boards/${id}/comment`, {
+      const response = await axios.post(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}/comment`, {
         content: comment
       });
   
@@ -53,7 +53,7 @@ const CommunityDetailPage = () => {
     try {
       // 서버에 댓글 삭제 요청
       const response = await axios.delete(
-        `http://localhost:8080/boards/${id}/comment/${commentId}?page=${currentPage}`
+        `http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}/comment/${commentId}?page=${currentPage}`
       );
 
       // 삭제된 댓글을 댓글 목록에서 제외
@@ -69,7 +69,7 @@ const CommunityDetailPage = () => {
     try {
       // 서버에 댓글 수정 요청
       const response = await axios.post(
-        `http://localhost:8080/boards/${id}/comment/${commentId}?page=${currentPage}`,
+        `http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}/comment/${commentId}?page=${currentPage}`,
         {
           content: editedContent,
         }
@@ -92,7 +92,7 @@ const CommunityDetailPage = () => {
     const fetchComments = async () => {
       try {
         const commentResponse = await axios.get(
-          `http://localhost:8080/boards/${id}/comment?page=${currentPage}`
+          `http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/boards/${id}/comment?page=${currentPage}`
         );
         const commentData = commentResponse.data;
         setComments(commentData.content);

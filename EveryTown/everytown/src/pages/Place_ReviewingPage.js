@@ -23,7 +23,7 @@ function Place_ReviewingPage() {
 
   const handleReviewSave = async () => {
     try {
-      await axios.post(`http://localhost:8080/place/${id}/review`, {
+      await axios.post(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place/${id}/review`, {
         content: reviewContent,
         rating: rating,
         tag: tags

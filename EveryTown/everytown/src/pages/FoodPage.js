@@ -28,7 +28,7 @@ function FoodPage() {
 
   const fetchRecommendations = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/restaurants/recommend', {
+      const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/restaurants/recommend', {
         params: {
           lat: location.lat,
           lon: location.lon
@@ -42,7 +42,7 @@ function FoodPage() {
   
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/restaurants', {
+      const response = await axios.get('http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/restaurants', {
         params: {
           lat: location.lat,
           lon: location.lon,
