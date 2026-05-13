@@ -1,8 +1,6 @@
 package com.inha.everytown.domain.place.entity.document;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.elasticsearch.annotations.*;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
@@ -12,6 +10,8 @@ import java.util.List;
 
 @Document(indexName = "place")
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Mapping(mappingPath = "elastic/place-mapping.json")
 @Setting(settingPath = "elastic/analysis-setting.json")
@@ -78,7 +78,7 @@ public class PlaceDoc {
 
     public Double getRating() {
         this.rating = 0.0;
-        if (!this.review.isEmpty()) {
+        if (this.review != null && !this.review.isEmpty()) {
             int cnt = 0;
             for (PlaceReviewDoc reviewDoc : this.review) {
                 this.rating += reviewDoc.getRating();
@@ -91,7 +91,7 @@ public class PlaceDoc {
     }
 
     public Integer getReviewCnt() {
-        this.reviewCnt = this.review.size();
+        this.reviewCnt = (this.review == null) ? 0 : this.review.size();
         return reviewCnt;
     }
 
