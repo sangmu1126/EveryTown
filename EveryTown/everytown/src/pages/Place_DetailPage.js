@@ -37,7 +37,7 @@ function Place_DetailPage() {
     // 서버로부터 플레이스 상세 정보를 가져옵니다.
     const fetchPlaceDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/place/${id}/basicInfo`, {
+        const response = await axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place/${id}/basicInfo`, {
          
         params: {
             lat: location.lat,
@@ -45,24 +45,28 @@ function Place_DetailPage() {
           }
         });
         setPlaceData(response.data);
-        const options = {
-          center: new window.kakao.maps.LatLng(response.data.latitude, response.data.longitude),
-          level: 3
-        };
 
-        // 지도 생성
-        const map = new window.kakao.maps.Map(mapContainer.current, options);
-
-        // 마커 위치 설정
-        const markerPosition  = new window.kakao.maps.LatLng(response.data.latitude, response.data.longitude);
-
-        // 마커 생성
-        const marker = new window.kakao.maps.Marker({
-          position: markerPosition
-        });
-
-        // 마커를 지도에 표시
-        marker.setMap(map);
+        // 지도 초기화 안전하게 수행
+        if (window.kakao && window.kakao.maps) {
+          const options = {
+            center: new window.kakao.maps.LatLng(response.data.latitude, response.data.longitude),
+            level: 3
+          };
+  
+          // 지도 생성
+          const map = new window.kakao.maps.Map(mapContainer.current, options);
+  
+          // 마커 위치 설정
+          const markerPosition  = new window.kakao.maps.LatLng(response.data.latitude, response.data.longitude);
+  
+          // 마커 생성
+          const marker = new window.kakao.maps.Marker({
+            position: markerPosition
+          });
+  
+          // 마커를 지도에 표시
+          marker.setMap(map);
+        }
 
       } catch (error) {
         console.error('Error fetching place details:', error);
@@ -72,7 +76,7 @@ function Place_DetailPage() {
     // 플레이스 메뉴 가져오기
     const fetchMenu = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/place/${id}/menuInfo`);
+        const response = await axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place/${id}/menuInfo`);
         setMenuData(response.data);
       } catch (error) {
         console.error('Error fetching menu:', error);
@@ -82,7 +86,7 @@ function Place_DetailPage() {
     // 플레이스 리뷰 가져오기
     const fetchReviews = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/place/${id}/review`);
+        const response = await axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place/${id}/review`);
         setReviewData(response.data);
       } catch (error) {
         console.error('Error fetching reviews:', error);
@@ -94,7 +98,7 @@ function Place_DetailPage() {
       if(!placeData.image) {
         try {
           // place 반환
-          const response = await axios.get(`http://localhost:8080/place/${id}/image`, {
+          const response = await axios.get(`http://everytown-alb-420204792.ap-northeast-2.elb.amazonaws.com/place/${id}/image`, {
             params:{
               lat: location.lat,
               lon: location.lon,

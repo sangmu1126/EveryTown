@@ -12,18 +12,33 @@ const LocationChangePage = () => {
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState(null);
 
-
   useEffect(() => {
-    const container = document.getElementById('map');
-    const options = {
-      center: new window.kakao.maps.LatLng(37.5665, 126.9780),
-      level: 3
+    const initMap = () => {
+      if (window.kakao && window.kakao.maps) {
+        const container = document.getElementById('map');
+        if (!container) return;
+        
+        const options = {
+          center: new window.kakao.maps.LatLng(37.4514023588, 126.6514957083), // 기본 위치 (인하공전 인근)
+          level: 3
+        };
+        const newMap = new window.kakao.maps.Map(container, options);
+        setMap(newMap);
+      } else {
+        // 아직 로드되지 않았다면 100ms 후에 다시 시도
+        setTimeout(initMap, 100);
+      }
     };
-    const map = new window.kakao.maps.Map(container, options);
-    setMap(map);
+
+    initMap();
   }, []);
 
   const handleSearch = () => {
+    if (!window.kakao || !window.kakao.maps || !map) {
+      alert("지도가 아직 준비되지 않았습니다. 잠시만 기다려 주세요.");
+      return;
+    }
+
     const places = new window.kakao.maps.services.Places();
     places.keywordSearch(searchKeyword, (result, status) => {
       if (status === window.kakao.maps.services.Status.OK) {
@@ -50,9 +65,8 @@ const LocationChangePage = () => {
     }
   };
 
-   const handleSetLocation = () => {
+  const handleSetLocation = () => {
     if (localLocation) {
-      // 전역 상태를 업데이트합니다.
       setLocation(localLocation);
       navigate('/');
     }
@@ -71,7 +85,9 @@ const LocationChangePage = () => {
        <button onClick={handleSearch}>검색</button>
       </div>
       <p></p>
-      <div id="map" style={{ width: '80%', height: '700px' }}></div>
+      <div id="map" style={{ width: '80%', height: '700px', backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {(!window.kakao || !window.kakao.maps) && <p>지도를 불러오는 중입니다...</p>}
+      </div>
       <p></p>
       <div >
        <button className='location-set-location-button' onClick={handleSetLocation}>위치 저장</button>

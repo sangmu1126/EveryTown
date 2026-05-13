@@ -11,22 +11,26 @@ const LocationInfo = () => {
         if (!location.lat || !location.lon) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    const geocoder = new window.kakao.maps.services.Geocoder();
-                    const callback = function(result, status) {
-                        if (status === window.kakao.maps.services.Status.OK) {
-                            const address = result[0].address;
-                            // 전역 위치 상태 업데이트
-                            setLocation({ lat: position.coords.latitude, lon: position.coords.longitude, address: `${address.region_2depth_name} ${address.region_3depth_name}` });
-                        }
-                    };
-                    geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
+                    if (window.kakao && window.kakao.maps && window.kakao.maps.services) {
+                        const geocoder = new window.kakao.maps.services.Geocoder();
+                        const callback = function(result, status) {
+                            if (status === window.kakao.maps.services.Status.OK) {
+                                const address = result[0].address;
+                                setLocation({ lat: position.coords.latitude, lon: position.coords.longitude, address: `${address.region_2depth_name} ${address.region_3depth_name}` });
+                            }
+                        };
+                        geocoder.coord2Address(position.coords.longitude, position.coords.latitude, callback);
+                    } else {
+                        // 카카오 지도가 없을 경우 좌표만이라도 저장
+                        setLocation({ lat: position.coords.latitude, lon: position.coords.longitude, address: '위치 정보 로드 중...' });
+                    }
                 },
                 (error) => {
                     console.error("Geolocation error:", error);
                 }
             );
         }
-    }, [location, setLocation]); // 의존성 배열에 location과 setLocation 추가
+    }, [location, setLocation]);
 
     return <div>{location.address}</div>;
 }
