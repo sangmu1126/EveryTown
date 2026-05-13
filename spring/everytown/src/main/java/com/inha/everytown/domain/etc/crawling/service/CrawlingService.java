@@ -48,15 +48,21 @@ public class CrawlingService {
         this.placeMenuService = placeMenuService;
         this.placeDocService = placeDocService;
 
-        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--remote-allow-origins=*");
-        options.setCapability("ignoreProtectedModeSettings", true);
+        WebDriver tempDriver = null;
+        try {
+            System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
+            ChromeOptions options = new ChromeOptions();
+            options.setHeadless(true);
+            options.addArguments("--start-maximized");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--remote-allow-origins=*");
+            options.setCapability("ignoreProtectedModeSettings", true);
 
-        this.driver = new ChromeDriver(options);
+            tempDriver = new ChromeDriver(options);
+        } catch (Exception e) {
+            log.warn("ChromeDriver initialization failed (expected in cloud environment): {}", e.getMessage());
+        }
+        this.driver = tempDriver;
     }
     public List<RestaurantMenuDto> getRestaurantMenuData(Long restaurantId) {
 

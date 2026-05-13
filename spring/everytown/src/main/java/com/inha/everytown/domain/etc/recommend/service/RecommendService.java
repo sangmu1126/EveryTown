@@ -34,8 +34,13 @@ public class RecommendService {
     public List<RestaurantBasicInfoDto> getRestaurantRecommend(Long memberId, double lat, double lon) {
         RestTemplate rt = new RestTemplate();
 
+        String recommendUrl = System.getenv("RECOMMEND_URL");
+        if (recommendUrl == null) {
+            recommendUrl = "http://localhost:5000";
+        }
+
         UriComponents url = UriComponentsBuilder
-                .fromUriString("http://localhost:5000")
+                .fromUriString(recommendUrl)
                 .path("/restaurant")
                 .queryParam("lat", lat)
                 .queryParam("lon", lon)
@@ -74,8 +79,13 @@ public class RecommendService {
     public List<PlaceBasicInfoDto> getPlaceRecommend(Long memberId, double lat, double lon, String middle_cate) {
         RestTemplate rt = new RestTemplate();
 
+        String recommendUrl = System.getenv("RECOMMEND_URL");
+        if (recommendUrl == null) {
+            recommendUrl = "http://localhost:5000";
+        }
+
         UriComponents url = UriComponentsBuilder
-                .fromUriString("http://localhost:5000")
+                .fromUriString(recommendUrl)
                 .path("/place")
                 .queryParam("lat", lat)
                 .queryParam("lon", lon)
